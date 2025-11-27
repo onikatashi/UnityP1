@@ -9,6 +9,7 @@ public class DestroyZone : MonoBehaviour
     public GameObject Player;
     PlayerFire pf;
 
+
     private void Start()
     {
         pf = Player.GetComponent<PlayerFire>();
@@ -51,6 +52,19 @@ public class DestroyZone : MonoBehaviour
             //pf.bulletPool.Add(other.gameObject);
 
             pf.ReloadBullet(other.gameObject);
+        }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("HelperBullet"))
+        {
+            // 오브젝트 비활성화
+            other.gameObject.SetActive(false);
+
+            HelperObejctPool.Instance.ReloadBullet(other.gameObject);
+        }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            Destroy(other.gameObject);
         }
     }
 }

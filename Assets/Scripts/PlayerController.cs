@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -23,6 +25,9 @@ public class PlayerController : MonoBehaviour
     public float paddingY = 0.05f;
     // UI 요소 중 마진과 패딩이 있다
     // 마진은 가장 바깥, 그 안쪽이 패딩, 중앙에 콘텐츠가 있다
+
+    public List<GameObject> playerHelper;   // 따라다니는 조력자들
+    int currentHelper = 0;              // 활성화 될 조력자 번호
 
     void Start()
     {
@@ -175,4 +180,17 @@ public class PlayerController : MonoBehaviour
         transform.position = mainCamera.ViewportToWorldPoint(position);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == LayerMask.NameToLayer("Item"))
+        {
+            playerHelper[currentHelper].SetActive(true);
+            if(playerHelper.Count > currentHelper - 1)
+            {
+                currentHelper++;
+            }
+
+            Destroy(other.gameObject);
+        }
+    }
 }
