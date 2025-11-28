@@ -50,5 +50,6 @@ public class Enemy : MonoBehaviour
 
         GameObject fx = Instantiate(fxFactory);
         fx.transform.position = transform.position;
+        Destroy(fx, 2);
     }
 }
