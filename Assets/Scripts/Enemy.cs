@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
     public float speed = 5f;            // 적 비행기 속도
     public GameObject bulletFactory;    // 총알 공장
 
+    public GameObject fxFactory;        // 이펙트 공장
+
     // Update is called once per frame
     void Update()
     {
@@ -25,6 +27,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.name == "Player")
         {
             // 폭발 효과
+            ShowEffect();
             // 사운드 효과
             // 점수 증가
             // 적 비행기 사라짐
@@ -36,5 +39,16 @@ public class Enemy : MonoBehaviour
 
             // 씬 전환 처리
         }
+    }
+
+    void ShowEffect()
+    {
+        //if (fxFactory != null)
+        //{
+        //    Instantiate(fxFactory, transform.position, Quaternion.identity);
+        //}
+
+        GameObject fx = Instantiate(fxFactory);
+        fx.transform.position = transform.position;
     }
 }
